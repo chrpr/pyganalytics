@@ -21,15 +21,20 @@ import dateutil.parser
 parser = argparse.ArgumentParser(description='Takes output file, config, secret')
 parser.add_argument('-o','--output', help='Output file name',required=True)
 parser.add_argument('-c', '--config', help='Configuration File Name', required=True)
+parser.add_argument('-f', '--first', help='Harvest Start Date', required=True)
+parser.add_argument('-l', '--last', help='Harvest End Date')
 #parser.add_argument('-i', '--profile-id', help='Profile to Analyze (number', required=True)
 #parser.add_argument('-p', '--property', help='Property to Analyze (number', required=True)
 
 args = parser.parse_args()
 
 #first = dateutil.parser.parse("2013-04-08")
-first = dateutil.parser.parse("2015-10-08")
+first = dateutil.parser.parse(args.first)
 
-last = datetime.now()
+if args.last: 
+    last = dateutil.parser.parse(args.last)
+else: 
+    last = datetime.now()
 
 #first = dateutil.parser.parse("2015-06-22")
 #last = dateutil.parser.parse("2015-06-28")
@@ -39,11 +44,16 @@ last = datetime.now()
 #analyt.write("item|hits\n")
 analyt = codecs.open(args.output, 'w', encoding='utf-8')
 logger = codecs.open('analytics.log', 'a', encoding='utf-8')
-analyt.write("dimension|count\n")
 
 
 with open(args.config, 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
+
+header = ""
+for dim in cfg['query']['dimensions'].split(","):
+    header += dim + "|"
+header += "count\n"
+analyt.write(header)
 
 logger.write("\n\n##########\n##### " + str(last) + "\n##########\n\n")
 

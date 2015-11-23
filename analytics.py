@@ -161,10 +161,16 @@ def store_data(data):
     print 'Data Length: %s' % len(data.get('rows'))
     print 'First Results: %s' % data.get('rows')[0]
     for row in data.get('rows'):
-        if row[0] in counts: 
-            counts[row[0]] += int(row[1])
+        dims = len(cfg['query']['dimensions'].split(","))
+        key = ""
+        for i in range(0,dims):
+            key += row[i] + "|"
+        key.rstrip("|")
+        #print key.encode('utf-8')
+        if key in counts: 
+            counts[key] += int(row[dims])
         else:
-            counts[row[0]] = int(row[1])
+            counts[key] = int(row[dims])
     #json +=  data.get('rows')
 
   else:
@@ -179,7 +185,7 @@ def print_pagination_info(results):
 def print_data(counts):
     print 'Total Items = %s' % len(counts)
     for k, v in counts.iteritems():
-        analyt.write(k + "|" + str(v) + "\n")
+        analyt.write(k + str(v) + "\n")
 
 if __name__ == '__main__':
   main(sys.argv)

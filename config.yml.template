@@ -1,0 +1,8 @@
+query:
+    metrics: ga:pageviews
+    dimensions: ga:pagePath
+    sort: -ga:pageviews
+    filters:  
+profile: 12345678
+
+

@@ -1,0 +1,16 @@
+# Ignore auth info
+analytics.dat*
+client_secrets.json
+
+# Ignore output files
+*.txt
+*.csv
+
+# Ignore config info
+*.yml
+
+# Ignore logs
+analytics.log
+
+# Ignore compiled code
+*.pyc

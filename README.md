@@ -47,7 +47,9 @@ You'll need to set up authentication.
 	* Start Date (date to begin harvesting from)
 	* End Date (default is current date)
 
+
        		# python analytics.py -o test.csv -c nyu.yml -f 2015-11-01
+
 
 * By default, it runs in "weekly mode", but if you see "sampling", can be changed to daily.
 	* Change rrule.WEEKLY to rrule.DAILY

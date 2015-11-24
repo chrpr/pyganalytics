@@ -54,3 +54,9 @@ You'll need to set up authentication.
 * By default, it runs in "weekly mode", but if you see "sampling", can be changed to daily.
 	* Change rrule.WEEKLY to rrule.DAILY
     * Change timedelta(days=6) to timedelta(days=0)
+
+Note, the code herein is based on an older iteration of Google's HelloAnalyticsAPI Python code:
+https://developers.google.com/analytics/devguides/reporting/core/v3/quickstart/service-py
+
+It is therefore licensed under an Apache 2.0 License.
+
